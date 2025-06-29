@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+
+    stages {
+        stage('Clone') {
+            steps {
+                echo 'Cloning repository...'
+                sh 'git clone https://github.com/teerayutte/web-simple-project.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'docker build -t my-web-app .'
+            }
+        }
+        stage('Run') {
+            steps {
+                echo 'Running...'
+                sh 'docker rm -f my-web || true'
+                sh 'docker run -d --name my-web -p 8080:80 my-web-app'
+            }
+        }
+    }
+}
