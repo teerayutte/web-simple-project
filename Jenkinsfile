@@ -5,6 +5,7 @@ pipeline{
         stage('Clone') {
             steps {
                 echo 'Cloning repository...'
+                sh 'rm -rf web-simple-project || true'
                 sh 'git clone https://github.com/teerayutte/web-simple-project.git'
             }
         }
