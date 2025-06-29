@@ -1,5 +1,10 @@
 pipeline{
-    agent any
+    agent {
+        docker {
+            image 'docker:28.1.1'
+            args '--privileged -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     stages {
         stage('Clone') {
